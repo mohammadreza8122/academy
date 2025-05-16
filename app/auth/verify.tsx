@@ -6,6 +6,7 @@ import { Typography } from '@/constants/Typography';
 import OTPInput from '@/components/ui/OTPInput';
 import Button from '@/components/ui/Button';
 import { useAuth } from '@/hooks/useAuth';
+import { api } from '@/utils/api';
 
 export default function VerifyPage() {
   const { phone } = useLocalSearchParams();
@@ -35,8 +36,9 @@ export default function VerifyPage() {
     if (timer > 0) return;
     
     try {
-      // TODO: Call API to resend OTP
+      await api.auth.requestOTP(phone as string);
       setTimer(177);
+      setError('');
     } catch (err) {
       setError('خطا در ارسال مجدد کد. لطفاً دوباره تلاش کنید');
     }
@@ -52,15 +54,15 @@ export default function VerifyPage() {
     setLoading(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await api.auth.verifyOTP(phone as string, otp);
+      login(response.user);
       
-      // For demo, we'll consider any 5-digit code as valid
-      // In real app, this should be validated by the backend
-      login(phone as string);
-      
-      // Navigate to tabs
-      router.replace('/(tabs)');
+      // If this is a new user, redirect to complete profile
+      if (response.is_new) {
+        router.replace('/auth/complete-profile');
+      } else {
+        router.replace('/(tabs)');
+      }
     } catch (err) {
       setError('کد وارد شده صحیح نیست');
     } finally {

@@ -1,0 +1,568 @@
+{
+	"info": {
+		"_postman_id": "1e9c78b9-9e17-4d6b-9f4f-2de404ff403a",
+		"name": "user",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18148474"
+	},
+	"item": [
+		{
+			"name": "verify otp",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"phone_number\": \"09352554850\",\n    \"code\": \"12332\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/user/auth/verify-otp/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"auth",
+						"verify-otp",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "verify otp",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone_number\": \"09352554850\",\n    \"code\": \"92406\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/user/auth/verify-otp/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"user",
+								"auth",
+								"verify-otp",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 16 May 2025 20:50:06 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.10.12"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Accept-Language, origin"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "648"
+						},
+						{
+							"key": "Content-Language",
+							"value": "fa"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"is_new\": false,\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0NzUxNTAwNiwiaWF0IjoxNzQ3NDI4NjA2LCJqdGkiOiJhZTdlYjJlYmRkOGE0ZDAzYjQ0ZmVmNzQ1NmFkNjM2ZCIsInVzZXJfaWQiOjEzNH0._ai8G85lPjCt5xUkVTiqiexit4IuYzdpdOT3fwNdjzc\",\n    \"access\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NDMyMjA2LCJpYXQiOjE3NDc0Mjg2MDYsImp0aSI6ImU4YWY5NDliNjJiZjQ0NTZhM2E3Nzc5ZmNlOTY2NzBlIiwidXNlcl9pZCI6MTM0fQ.eKDz6B3lcTzm69taaXNSJY4R5lAKyPTHRHdkQyZzo_Q\",\n    \"user\": {\n        \"id\": 134,\n        \"phone_number\": \"09352554850\",\n        \"first_name\": \"mohammad\",\n        \"last_name\": \"salehi\",\n        \"email\": \"momcos@gmail.com\",\n        \"is_phone_verified\": true\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "request otp",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"phone_number\": \"09352554850\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/user/auth/request-otp/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"auth",
+						"request-otp",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "request otp",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone_number\": \"09352554850\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/user/auth/request-otp/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"user",
+								"auth",
+								"request-otp",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 16 May 2025 20:49:54 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.10.12"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Accept-Language, origin"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "50"
+						},
+						{
+							"key": "Content-Language",
+							"value": "fa"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"OTP sent successfully\",\n    \"code\": \"92406\"\n}"
+				}
+			]
+		},
+		{
+			"name": "get profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NDMyMjA2LCJpYXQiOjE3NDc0Mjg2MDYsImp0aSI6ImU4YWY5NDliNjJiZjQ0NTZhM2E3Nzc5ZmNlOTY2NzBlIiwidXNlcl9pZCI6MTM0fQ.eKDz6B3lcTzm69taaXNSJY4R5lAKyPTHRHdkQyZzo_Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "first_name",
+							"value": "mohammad",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "salehi",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "momcos@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/user/profile/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"profile",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get profile",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NDMyMjA2LCJpYXQiOjE3NDc0Mjg2MDYsImp0aSI6ImU4YWY5NDliNjJiZjQ0NTZhM2E3Nzc5ZmNlOTY2NzBlIiwidXNlcl9pZCI6MTM0fQ.eKDz6B3lcTzm69taaXNSJY4R5lAKyPTHRHdkQyZzo_Q",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "mohammad",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "salehi",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "momcos@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/user/profile/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"user",
+								"profile",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 16 May 2025 20:50:45 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.10.12"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Accept-Language, origin"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "136"
+						},
+						{
+							"key": "Content-Language",
+							"value": "fa"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 134,\n    \"phone_number\": \"09352554850\",\n    \"first_name\": \"mohammad\",\n    \"last_name\": \"salehi\",\n    \"email\": \"momcos@gmail.com\",\n    \"is_phone_verified\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "get profile Copy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NDMyMjA2LCJpYXQiOjE3NDc0Mjg2MDYsImp0aSI6ImU4YWY5NDliNjJiZjQ0NTZhM2E3Nzc5ZmNlOTY2NzBlIiwidXNlcl9pZCI6MTM0fQ.eKDz6B3lcTzm69taaXNSJY4R5lAKyPTHRHdkQyZzo_Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "first_name",
+							"value": "mohammad",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "salehi",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "momcos@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/user/profile/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"profile",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get profile",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NDMyMjA2LCJpYXQiOjE3NDc0Mjg2MDYsImp0aSI6ImU4YWY5NDliNjJiZjQ0NTZhM2E3Nzc5ZmNlOTY2NzBlIiwidXNlcl9pZCI6MTM0fQ.eKDz6B3lcTzm69taaXNSJY4R5lAKyPTHRHdkQyZzo_Q",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "mohammad",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "salehi",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "momcos@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/user/profile/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"user",
+								"profile",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 16 May 2025 20:51:26 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.10.12"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Accept-Language, origin"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, PUT, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "136"
+						},
+						{
+							"key": "Content-Language",
+							"value": "fa"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 134,\n    \"phone_number\": \"09352554850\",\n    \"first_name\": \"mohammad\",\n    \"last_name\": \"salehi\",\n    \"email\": \"momcos@gmail.com\",\n    \"is_phone_verified\": true\n}"
+				}
+			]
+		}
+	]
+}

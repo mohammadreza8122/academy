@@ -25,8 +25,10 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'خانه',
-          tabBarIcon: ({ color }) => <Home size={24} color={color} />,
+          title: i18n.t('home'),
+          tabBarIcon: ({ size, color }) => (
+            <Home size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
@@ -59,8 +61,11 @@ export default function TabLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'پروفایل',
-          tabBarIcon: ({ color }) => <User size={24} color={color} />,
+          title: i18n.t('profile'),
+          tabBarIcon: ({ size, color }) => (
+            <User size={size} color={color} />
+          ),
+          href: null,
         }}
       />
       <Tabs.Screen

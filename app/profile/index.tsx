@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, ScrollView, ActivityIndicator } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, Text, ScrollView, RefreshControl, ActivityIndicator } from 'react-native';
 import { router } from 'expo-router';
 import { Colors } from '@/constants/Colors';
 import { Typography } from '@/constants/Typography';
@@ -7,9 +7,11 @@ import TextInput from '@/components/ui/TextInput';
 import Button from '@/components/ui/Button';
 import { useAuth } from '@/hooks/useAuth';
 import { api } from '@/utils/api';
+import type { User } from '@/types/auth';
 
-export default function CompleteProfilePage() {
-  const { user, updateUser } = useAuth();
+export default function ProfilePage() {
+  const { user: authUser, updateUser, logout } = useAuth();
+  const [user, setUser] = useState<User | null>(authUser);
   const [firstName, setFirstName] = useState(user?.first_name || '');
   const [lastName, setLastName] = useState(user?.last_name || '');
   const [email, setEmail] = useState(user?.email || '');
@@ -19,30 +21,43 @@ export default function CompleteProfilePage() {
     email: '',
   });
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [initialLoading, setInitialLoading] = useState(true);
 
   useEffect(() => {
-    checkUserProfile();
+    loadProfile();
   }, []);
 
-  const checkUserProfile = async () => {
+  const loadProfile = async () => {
     try {
       const userData = await api.user.getProfile();
-      
-      // اگر کاربر قبلاً پروفایلش رو تکمیل کرده، به صفحه اصلی هدایت شود
-      if (userData.first_name || userData.last_name || userData.email) {
-        router.replace('/(tabs)');
-        return;
-      }
-
+      setUser(userData);
       setFirstName(userData.first_name || '');
       setLastName(userData.last_name || '');
       setEmail(userData.email || '');
+      
+      // اگر کاربر جدید است و اطلاعاتش کامل نیست، به صفحه تکمیل پروفایل هدایت شود
+      if (!userData.first_name && !userData.last_name && !userData.email) {
+        router.replace('/auth/complete-profile');
+        return;
+      }
     } catch (error) {
-      console.error('Error checking profile:', error);
+      console.error('Error loading profile:', error);
+      // اگر خطای 401 داشتیم یعنی توکن منقضی شده
+      if ((error as any)?.response?.status === 401) {
+        await logout();
+        router.replace('/auth/phone');
+        return;
+      }
     } finally {
       setInitialLoading(false);
     }
+  };
+
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await loadProfile();
+    setRefreshing(false);
   };
 
   const validateEmail = (email: string) => {
@@ -76,10 +91,11 @@ export default function CompleteProfilePage() {
         email: email || undefined,
       });
 
-      // Update user in auth state
+      // Update user in auth state and local state
       updateUser(updatedUser);
-
-      // Navigate to main app
+      setUser(updatedUser);
+      
+      // بعد از ذخیره موفق، کاربر به صفحه اصلی برنامه هدایت شود
       router.replace('/(tabs)');
     } catch (error) {
       console.error('Error updating profile:', error);
@@ -89,6 +105,12 @@ export default function CompleteProfilePage() {
     }
   };
 
+  const handleLogout = async () => {
+    await logout();
+    router.replace('/auth/phone');
+  };
+
+  // نمایش loading اولیه
   if (initialLoading) {
     return (
       <View style={styles.loadingContainer}>
@@ -97,17 +119,29 @@ export default function CompleteProfilePage() {
     );
   }
 
+  // اگر کاربر لاگین نیست، به صفحه ورود هدایت شود
+  if (!user) {
+    router.replace('/auth/phone');
+    return null;
+  }
+
   return (
     <ScrollView 
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
       keyboardShouldPersistTaps="handled"
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={handleRefresh}
+          colors={[Colors.accent.primary]}
+          tintColor={Colors.accent.primary}
+        />
+      }
     >
       <View style={styles.header}>
-        <Text style={styles.title}>تکمیل اطلاعات</Text>
-        <Text style={styles.description}>
-          لطفاً اطلاعات خود را تکمیل کنید تا بتوانیم خدمات بهتری به شما ارائه دهیم
-        </Text>
+        <Text style={styles.title}>پروفایل</Text>
+        <Text style={styles.phoneNumber}>{user.phone_number}</Text>
       </View>
 
       <View style={styles.form}>
@@ -141,11 +175,19 @@ export default function CompleteProfilePage() {
         />
 
         <Button
-          title="ذخیره اطلاعات"
+          title="ذخیره تغییرات"
           onPress={handleSubmit}
           loading={loading}
           fullWidth
           style={styles.button}
+        />
+
+        <Button
+          title="خروج از حساب کاربری"
+          onPress={handleLogout}
+          variant="outline"
+          fullWidth
+          style={styles.logoutButton}
         />
       </View>
     </ScrollView>
@@ -177,12 +219,11 @@ const styles = StyleSheet.create({
     color: Colors.text.primary,
     marginBottom: 8,
   },
-  description: {
+  phoneNumber: {
     fontFamily: Typography.fontFamily.regular,
     fontSize: Typography.fontSize.md,
     color: Colors.text.secondary,
-    textAlign: 'center',
-    paddingHorizontal: 32,
+    direction: 'ltr',
   },
   form: {
     width: '100%',
@@ -193,4 +234,7 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 8,
   },
-});
+  logoutButton: {
+    marginTop: 16,
+  },
+}); 

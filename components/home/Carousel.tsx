@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     height: 200,
   },
   imageDesktop: {
-    height: 400,
+    height: 100,
   },
   content: {
     position: 'absolute',

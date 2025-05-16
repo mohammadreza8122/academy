@@ -5,6 +5,7 @@ import { Colors } from '@/constants/Colors';
 import { Typography } from '@/constants/Typography';
 import PhoneInput from '@/components/ui/PhoneInput';
 import Button from '@/components/ui/Button';
+import { api } from '@/utils/api';
 
 export default function PhonePage() {
   const [phone, setPhone] = useState('');
@@ -21,11 +22,12 @@ export default function PhonePage() {
     setLoading(true);
 
     try {
-      // TODO: Call API to send OTP
-      // For now, just navigate to OTP page
+      const formattedPhone = `0${phone}`;
+      await api.auth.requestOTP(formattedPhone);
+      
       router.push({
         pathname: '/auth/verify',
-        params: { phone: `+98${phone}` },
+        params: { phone: formattedPhone },
       });
     } catch (err) {
       setError('خطا در ارسال کد تایید. لطفاً دوباره تلاش کنید');

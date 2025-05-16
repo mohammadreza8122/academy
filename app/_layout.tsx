@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useFrameworkReady } from '@/hooks/useFrameworkReady';
+import { useAuth } from '@/hooks/useAuth';
 import { 
   useFonts, 
   Vazirmatn_400Regular,
@@ -21,6 +22,7 @@ I18nManager.forceRTL(true);
 
 export default function RootLayout() {
   useFrameworkReady();
+  const { initialize } = useAuth();
 
   const [fontsLoaded, fontError] = useFonts({
     Vazirmatn_400Regular,
@@ -30,6 +32,9 @@ export default function RootLayout() {
   });
 
   useEffect(() => {
+    // Initialize auth state
+    initialize();
+
     // Hide splash screen once fonts are loaded or if there's an error
     if (fontsLoaded || fontError) {
       SplashScreen.hideAsync();
