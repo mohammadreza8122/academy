@@ -2,6 +2,7 @@ export const Colors = {
   background: {
     primary: '#FFFFFF',
     secondary: '#F5F5F5',
+    tertiary: '#EEEEEE',
   },
   text: {
     primary: '#1A1A1A',

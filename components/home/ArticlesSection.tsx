@@ -4,22 +4,34 @@ import { Colors } from '@/constants/Colors';
 import { Typography } from '@/constants/Typography';
 import { useIsDesktop } from '@/hooks/useIsDesktop';
 import ArticleCard from './ArticleCard';
+import { router } from 'expo-router';
 
 export default function ArticlesSection() {
   const isDesktop = useIsDesktop();
 
+  const handleSeeMorePress = () => {
+    router.push('/(tabs)/articles');
+  };
+
+  const handleArticlePress = (articleId: string) => {
+    router.push({
+      pathname: '/(tabs)/articles/[id]',
+      params: { id: articleId }
+    });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleSeeMorePress} activeOpacity={0.7}>
           <Text style={styles.seeMore}>نمایش بیشتر ›</Text>
         </TouchableOpacity>
         <Text style={styles.title}>مقالات</Text>
       </View>
       <View style={[styles.articlesGrid, isDesktop && styles.articlesGridDesktop]}>
-        <ArticleCard />
-        <ArticleCard />
-        <ArticleCard />
+        <ArticleCard onPress={() => handleArticlePress('1')} />
+        <ArticleCard onPress={() => handleArticlePress('2')} />
+        <ArticleCard onPress={() => handleArticlePress('3')} />
       </View>
     </View>
   );

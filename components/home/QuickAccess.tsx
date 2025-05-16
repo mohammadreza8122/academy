@@ -4,22 +4,57 @@ import { Colors } from '@/constants/Colors';
 import { Typography } from '@/constants/Typography';
 import { Video, Bookmark, FolderOpen, Tv, Mic } from 'lucide-react-native';
 import { useIsDesktop } from '@/hooks/useIsDesktop';
+import { router } from 'expo-router';
 
 const quickAccessItems = [
-  { icon: Video, label: 'استوری', color: Colors.accent.primary },
-  { icon: Bookmark, label: 'علاقه‌مندی‌ها', color: Colors.accent.secondary },
-  { icon: FolderOpen, label: 'فایل‌ها', color: Colors.accent.tertiary },
-  { icon: Tv, label: 'الایو', color: Colors.accent.quaternary },
-  { icon: Mic, label: 'پادکست‌ها', color: Colors.accent.quinary },
+  { 
+    icon: Video, 
+    label: 'استوری', 
+    color: Colors.accent.primary,
+    route: '/(tabs)/videos'
+  },
+  { 
+    icon: Bookmark, 
+    label: 'علاقه‌مندی‌ها', 
+    color: Colors.accent.secondary,
+    route: '/(tabs)/profile'
+  },
+  { 
+    icon: FolderOpen, 
+    label: 'فایل‌ها', 
+    color: Colors.accent.tertiary,
+    route: '/(tabs)/courses'
+  },
+  { 
+    icon: Tv, 
+    label: 'الایو', 
+    color: Colors.accent.quaternary,
+    route: '/(tabs)/videos'
+  },
+  { 
+    icon: Mic, 
+    label: 'پادکست‌ها', 
+    color: Colors.accent.quinary,
+    route: '/(tabs)/podcasts'
+  },
 ];
 
 export default function QuickAccess() {
   const isDesktop = useIsDesktop();
 
+  const handleItemPress = (route: string) => {
+    router.push(route);
+  };
+
   return (
     <View style={[styles.container, isDesktop && styles.containerDesktop]}>
       {quickAccessItems.map((item, index) => (
-        <TouchableOpacity key={index} style={styles.item}>
+        <TouchableOpacity 
+          key={index} 
+          style={styles.item}
+          onPress={() => handleItemPress(item.route)}
+          activeOpacity={0.7}
+        >
           <View style={[styles.iconContainer, { backgroundColor: item.color }]}>
             <item.icon size={24} color="white" />
           </View>

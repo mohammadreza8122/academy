@@ -25,7 +25,7 @@ export default function CoursesScreen() {
   const [searchQuery, setSearchQuery] = useState('');
   
   const handleCoursePress = (course: any) => {
-    router.push(`/courses/${course.id}`);
+    router.push({ pathname: '/(tabs)/courses/[id]', params: { id: course.id } });
   };
 
   // Filter courses by active category and search query

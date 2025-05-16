@@ -55,7 +55,7 @@ export default function ArticlesScreen() {
   const isDesktop = Platform.OS === 'web' && width >= 768;
 
   const handleArticlePress = (articleId: string) => {
-    router.push(`/articles/${articleId}`);
+    router.push({ pathname: '/(tabs)/articles/[id]', params: { id: articleId } });
   };
 
   const handleBack = () => {
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 20,
-    backgroundColor: Colors.background.tertiary,
+    backgroundColor: Colors.background.secondary,
     marginLeft: 8,
   },
   categoryButtonActive: {
@@ -410,6 +410,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   viewToggleButtonActive: {
-    backgroundColor: Colors.background.tertiary,
+    backgroundColor: Colors.background.secondary,
   },
 });

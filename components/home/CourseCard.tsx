@@ -3,7 +3,11 @@ import { StyleSheet, View, Image, Text, TouchableOpacity, useWindowDimensions } 
 import { Colors } from '@/constants/Colors';
 import { Typography } from '@/constants/Typography';
 
-export default function CourseCard() {
+interface CourseCardProps {
+  onPress: () => void;
+}
+
+export default function CourseCard({ onPress }: CourseCardProps) {
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
 
@@ -11,6 +15,7 @@ export default function CourseCard() {
     <TouchableOpacity 
       style={[styles.container, isDesktop && styles.containerDesktop]}
       activeOpacity={0.8}
+      onPress={onPress}
     >
       <Image
         source={require('@/assets/images/course-thumbnail.jpg')}

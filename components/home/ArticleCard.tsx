@@ -3,7 +3,11 @@ import { StyleSheet, View, Image, Text, TouchableOpacity, useWindowDimensions } 
 import { Colors } from '@/constants/Colors';
 import { Typography } from '@/constants/Typography';
 
-export default function ArticleCard() {
+interface ArticleCardProps {
+  onPress: () => void;
+}
+
+export default function ArticleCard({ onPress }: ArticleCardProps) {
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
 
@@ -11,6 +15,7 @@ export default function ArticleCard() {
     <TouchableOpacity 
       style={[styles.container, isDesktop && styles.containerDesktop]}
       activeOpacity={0.8}
+      onPress={onPress}
     >
       <Image
         source={require('@/assets/images/article-thumbnail.jpg')}
@@ -24,7 +29,7 @@ export default function ArticleCard() {
         <Text style={styles.excerpt} numberOfLines={3}>
           انطباق‌پذیری سازمانی یکی از مهمترین فاکتورهای موفقیت در دنیای کسب و کار امروز است...
         </Text>
-        <TouchableOpacity style={styles.readMore}>
+        <TouchableOpacity style={styles.readMore} onPress={onPress}>
           <Text style={styles.readMoreText}>مطالعه کامل مقاله</Text>
         </TouchableOpacity>
       </View>
