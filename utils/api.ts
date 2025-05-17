@@ -2,7 +2,7 @@ import axios from 'axios';
 import { storage } from './storage';
 import type { RequestOTPResponse, VerifyOTPResponse, User, UpdateProfileData } from '@/types/auth';
 
-const BASE_URL = 'http://127.0.0.1:8000';
+const BASE_URL = 'https://api.gport.sbs';
 
 // Create axios instance with base configuration
 const axiosInstance = axios.create({
@@ -71,4 +71,28 @@ export const api = {
       return response.data;
     },
   },
-}; 
+
+  courses: {
+    getList: async () => {
+      const response = await axiosInstance.get('/course/api/courses/');
+      return response.data;
+    },
+
+    getDetail: async (id: string) => {
+      const response = await axiosInstance.get(`/course/api/courses/${id}`);
+      return response.data;
+    }
+  },
+
+  articles: {
+    getList: async () => {
+      const response = await axiosInstance.get('/blog/api/articles/');
+      return response.data;
+    },
+
+    getDetail: async (id: string) => {
+      const response = await axiosInstance.get(`/blog/api/articles/${id}`);
+      return response.data;
+    }
+  }
+};
